@@ -20,9 +20,9 @@
            <menus>
              <Menu mnemonicParsing="false" text="Game">
                <items>
-                 <MenuItem mnemonicParsing="false" text="New" />
+                 <MenuItem text="New" />
                      <SeparatorMenuItem mnemonicParsing="false" />
-                     <MenuItem mnemonicParsing="false" text="End" />
+                     <MenuItem text="End" />
                </items>
              </Menu>
              <Menu mnemonicParsing="false" text="Moves">
