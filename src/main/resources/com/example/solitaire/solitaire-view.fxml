@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -9,64 +8,50 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox prefHeight="226.0" prefWidth="364.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.solitaire.SolitaireController">
-   <HBox>
-      <children>
-         <MenuBar>
-           <menus>
-             <Menu mnemonicParsing="false" text="Game">
-               <items>
-                 <MenuItem text="New" />
-                     <SeparatorMenuItem mnemonicParsing="false" />
-                     <MenuItem text="End" />
-               </items>
-             </Menu>
-             <Menu mnemonicParsing="false" text="Moves">
-               <items>
-                     <MenuItem mnemonicParsing="false" text="Mark up" />
-                     <MenuItem mnemonicParsing="false" text="Mark down" />
-                     <MenuItem mnemonicParsing="false" text="Mark left" />
-                     <MenuItem mnemonicParsing="false" text="Mark right" />
-                     <SeparatorMenuItem mnemonicParsing="false" />
-                 <MenuItem mnemonicParsing="false" text="Jump up" />
-                     <MenuItem mnemonicParsing="false" text="Jump down" />
-                     <MenuItem mnemonicParsing="false" text="Jump left" />
-                     <MenuItem mnemonicParsing="false" text="Jump right" />
-               </items>
-             </Menu>
-             <Menu mnemonicParsing="false" text="Settings">
-                  <items>
-                     <RadioMenuItem mnemonicParsing="false" selected="true" text="British board">
-                        <toggleGroup>
-                           <ToggleGroup fx:id="boardType" />
-                        </toggleGroup>
-                     </RadioMenuItem>
-                     <RadioMenuItem mnemonicParsing="false" text="European board" toggleGroup="$boardType" />
-                  </items>
-             </Menu>
-           </menus>
-         </MenuBar>
-         <Separator HBox.hgrow="ALWAYS" />
-         <MenuBar>
-            <HBox.margin>
-               <Insets />
-            </HBox.margin>
-            <menus>
-               <Menu mnemonicParsing="false" text="Help">
-                 <items>
-                   <MenuItem mnemonicParsing="false" text="About game" />
-                     <MenuItem mnemonicParsing="false" text="About app" />
-                 </items>
-               </Menu>
-            </menus>
-         </MenuBar>
-      </children>
-   </HBox>
-   <Separator />
+   <MenuBar>
+     <menus>
+       <Menu mnemonicParsing="false" text="Game">
+         <items>
+           <MenuItem text="New" />
+               <SeparatorMenuItem mnemonicParsing="false" />
+               <MenuItem text="End" />
+         </items>
+       </Menu>
+       <Menu mnemonicParsing="false" text="Moves">
+         <items>
+               <MenuItem mnemonicParsing="false" text="Mark up" />
+               <MenuItem mnemonicParsing="false" text="Mark down" />
+               <MenuItem mnemonicParsing="false" text="Mark left" />
+               <MenuItem mnemonicParsing="false" text="Mark right" />
+               <SeparatorMenuItem mnemonicParsing="false" />
+           <MenuItem mnemonicParsing="false" text="Jump up" />
+               <MenuItem mnemonicParsing="false" text="Jump down" />
+               <MenuItem mnemonicParsing="false" text="Jump left" />
+               <MenuItem mnemonicParsing="false" text="Jump right" />
+         </items>
+       </Menu>
+       <Menu mnemonicParsing="false" text="Settings">
+            <items>
+               <RadioMenuItem mnemonicParsing="false" selected="true" text="British board">
+                  <toggleGroup>
+                     <ToggleGroup fx:id="boardType" />
+                  </toggleGroup>
+               </RadioMenuItem>
+               <RadioMenuItem mnemonicParsing="false" text="European board" toggleGroup="$boardType" />
+            </items>
+       </Menu>
+         <Menu mnemonicParsing="false" text="Help">
+           <items>
+             <MenuItem mnemonicParsing="false" text="About game" />
+               <MenuItem mnemonicParsing="false" text="About app" />
+           </items>
+         </Menu>
+     </menus>
+   </MenuBar>
    <Pane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
    <Separator layoutX="10.0" layoutY="217.0" />
    <Label fx:id="statusLabel" text="Label" />
