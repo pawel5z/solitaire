@@ -1,4 +1,4 @@
-package com.example.solitaire;
+package com.example.solitaire.backend;
 
 enum SolitaireBoardType {
     BRITISH,

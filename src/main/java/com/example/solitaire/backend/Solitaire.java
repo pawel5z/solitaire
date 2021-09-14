@@ -1,10 +1,8 @@
-package com.example.solitaire;
+package com.example.solitaire.backend;
 
 import javafx.util.Pair;
-
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Optional;
 
 import static java.lang.Math.abs;
 
