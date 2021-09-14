@@ -35,6 +35,28 @@ public class Solitaire {
         pegs.remove(new Pair<>(dim / 2, dim / 2));
     }
 
+    public boolean move(int fromR, int fromC, int toR, int toC) {
+        if (!inBoard(fromR, fromC) || !inBoard(toR, toC))
+            return false;
+        int midR = (fromR + toR) / 2;
+        int midC = (fromC + toC) / 2;
+        // check if move is two fields long in a vertical/horizontal direction
+        if ((abs(midR - fromR) != 1 || abs(midR - toR) != 1 || fromC != toC)
+                && (abs(midC - fromC) != 1 || abs(midC - toC) != 1 || fromR != toR)) {
+            return false;
+        }
+        if (!pegs.contains(new Pair<>(fromR, toR))
+            || !pegs.contains(new Pair<>(midR, midC))
+            || pegs.contains(new Pair<>(toR, toC)))
+            return false;
+
+        // move is legal
+        pegs.remove(new Pair<>(fromR, toR));
+        pegs.add(new Pair<>(toR, toC));
+        pegs.remove(new Pair<>(midR, midC));
+        return true;
+    }
+
     private boolean inBoard(int r, int c) {
         if (boardType != SolitaireBoardType.BRITISH && britExclusive.contains(new Pair<>(r, c)))
             return false;
