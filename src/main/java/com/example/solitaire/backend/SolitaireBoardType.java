@@ -1,6 +1,6 @@
 package com.example.solitaire.backend;
 
-enum SolitaireBoardType {
+public enum SolitaireBoardType {
     BRITISH,
     EUROPEAN
 }
