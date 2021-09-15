@@ -3,6 +3,7 @@ package com.example.solitaire.backend;
 import javafx.util.Pair;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 
 import static java.lang.Math.abs;
 
@@ -55,6 +56,49 @@ public class Solitaire {
         pegs.add(new Pair<>(toR, toC));
         pegs.remove(new Pair<>(midR, midC));
         return true;
+    }
+
+    public boolean isWin() {
+        return isGameOver() && pegs.size() == 1;
+    }
+
+    public boolean isLose() {
+        return isGameOver() && pegs.size() != 1;
+    }
+
+    public boolean isGameOver() {
+        return pegs.stream().noneMatch(
+                (Pair<Integer, Integer> p) -> {
+                    int pr = p.getKey();
+                    int pc = p.getValue();
+
+                    // check if one can move peg p
+                    for (var d : new Pair[] {
+                            new Pair<>(-1, 0),
+                            new Pair<>(1, 0),
+                            new Pair<>(0, -1),
+                            new Pair<>(0, 1)}) {
+                        int dr = (int)d.getKey();
+                        int dc = (int)d.getValue();
+                        if (inBoard(pr + dr, pc + dc) && inBoard(pr + 2 * dr, pc + 2 * dc)
+                            && isFieldOccupied(pr + dr, pc + dc) && !isFieldOccupied(pr + 2 * dr, pc + 2 * dc))
+                            return true;
+                    }
+
+                    return false;
+                });
+    }
+
+    public boolean isFieldOccupied(Pair<Integer, Integer> f) {
+        return pegs.stream().anyMatch((Pair<Integer, Integer> p) -> Objects.equals(p, f));
+    }
+
+    public boolean isFieldOccupied(int r, int c) {
+        return isFieldOccupied(new Pair<>(r, c));
+    }
+
+    private boolean inBoard(Pair<Integer, Integer> p) {
+        return inBoard(p.getKey(), p.getValue());
     }
 
     private boolean inBoard(int r, int c) {
