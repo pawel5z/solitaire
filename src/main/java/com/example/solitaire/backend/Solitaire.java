@@ -46,13 +46,13 @@ public class Solitaire {
                 && (abs(midC - fromC) != 1 || abs(midC - toC) != 1 || fromR != toR)) {
             return false;
         }
-        if (!pegs.contains(new Pair<>(fromR, toR))
+        if (!pegs.contains(new Pair<>(fromR, fromC))
             || !pegs.contains(new Pair<>(midR, midC))
             || pegs.contains(new Pair<>(toR, toC)))
             return false;
 
         // move is legal
-        pegs.remove(new Pair<>(fromR, toR));
+        pegs.remove(new Pair<>(fromR, fromC));
         pegs.add(new Pair<>(toR, toC));
         pegs.remove(new Pair<>(midR, midC));
         return true;
