@@ -1,5 +1,7 @@
 package com.example.solitaire.backend;
 
+import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class SolitaireTest {
@@ -27,5 +29,25 @@ public class SolitaireTest {
     public void setBoardType() {
         solitaire.setBoardType(SolitaireBoardType.EUROPEAN);
         assertEquals(SolitaireBoardType.EUROPEAN, solitaire.getBoardType());
+    }
+
+    @Test
+    public void isWin() {
+        assertFalse(solitaire.isWin());
+    }
+
+    @Test
+    public void isLose() {
+        assertFalse(solitaire.isLose());
+    }
+
+    @Test
+    public void isGameOver() {
+        assertFalse(solitaire.isGameOver());
+    }
+
+    @Test
+    public void isFieldOccupied() {
+        assertFalse(solitaire.isFieldOccupied(3, 3));
     }
 }
