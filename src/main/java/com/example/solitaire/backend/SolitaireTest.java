@@ -18,6 +18,10 @@ public class SolitaireTest {
 
     @org.junit.Test
     public void move() {
+        assertTrue(solitaire.move(3, 5, 3, 3));
+        assertTrue(solitaire.isFieldOccupied(3, 3));
+        assertFalse(solitaire.isFieldOccupied(3, 4));
+        assertFalse(solitaire.isFieldOccupied(3, 5));
     }
 
     @org.junit.Test
