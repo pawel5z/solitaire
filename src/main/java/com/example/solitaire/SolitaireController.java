@@ -20,8 +20,8 @@ public class SolitaireController {
         // bind fields' sizes to grid's size
         for (Node node : board.getChildren()) {
             Rectangle rect = (Rectangle) node;
-            rect.widthProperty().bind(board.widthProperty().divide(board.getRowCount()));
-            rect.heightProperty().bind(board.heightProperty().divide(board.getColumnCount()));
+            rect.widthProperty().bind(board.widthProperty().divide(board.getColumnCount()));
+            rect.heightProperty().bind(board.heightProperty().divide(board.getRowCount()));
         }
     }
 }
