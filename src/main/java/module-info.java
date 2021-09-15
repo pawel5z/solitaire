@@ -1,6 +1,7 @@
 module com.example.solitaire {
     requires javafx.controls;
     requires javafx.fxml;
+    requires junit;
 
 
     opens com.example.solitaire to javafx.fxml;
