@@ -20,10 +20,12 @@ public class SolitaireTest {
 
     @Test
     public void pegIsTakenOff() {
-        assertTrue(solitaire.move(3, 5, 3, 3));
+        int pegsNumberBefore = solitaire.pegsLeftCount();
+        assertNotNull(solitaire.move(3, 5, 3, 3));
         assertTrue(solitaire.isFieldOccupied(3, 3));
         assertFalse(solitaire.isFieldOccupied(3, 4));
         assertFalse(solitaire.isFieldOccupied(3, 5));
+        assertEquals(pegsNumberBefore - 1, solitaire.pegsLeftCount());
     }
 
     @Test
