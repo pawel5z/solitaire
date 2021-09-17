@@ -35,26 +35,26 @@ public class Solitaire {
         pegs.remove(new Pair<>(dim / 2, dim / 2));
     }
 
-    public boolean move(int fromR, int fromC, int toR, int toC) {
+    public Pair<Integer, Integer> move(int fromR, int fromC, int toR, int toC) {
         if (!inBoard(fromR, fromC) || !inBoard(toR, toC))
-            return false;
+            return null;
         int midR = (fromR + toR) / 2;
         int midC = (fromC + toC) / 2;
         // check if move is two fields long in a vertical/horizontal direction
         if ((abs(midR - fromR) != 1 || abs(midR - toR) != 1 || fromC != toC)
                 && (abs(midC - fromC) != 1 || abs(midC - toC) != 1 || fromR != toR)) {
-            return false;
+            return null;
         }
         if (!pegs.contains(new Pair<>(fromR, fromC))
             || !pegs.contains(new Pair<>(midR, midC))
             || pegs.contains(new Pair<>(toR, toC)))
-            return false;
+            return null;
 
         // move is legal
         pegs.remove(new Pair<>(fromR, fromC));
         pegs.add(new Pair<>(toR, toC));
         pegs.remove(new Pair<>(midR, midC));
-        return true;
+        return new Pair<>(midR, midC);
     }
 
     public boolean isWin() {
