@@ -1,9 +1,8 @@
 package com.example.solitaire.backend;
 
 import javafx.util.Pair;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
+
+import java.util.*;
 
 import static java.lang.Math.abs;
 
@@ -117,5 +116,9 @@ public class Solitaire {
 
     public void setBoardType(SolitaireBoardType boardType) {
         this.boardType = boardType;
+    }
+
+    public Set<Pair<Integer, Integer>> getPegPositions() {
+        return Collections.unmodifiableSet(pegs);
     }
 }
