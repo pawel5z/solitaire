@@ -103,7 +103,7 @@ public class Solitaire {
     private boolean inBoard(int r, int c) {
         if (boardType != SolitaireBoardType.BRITISH && britExclusive.contains(new Pair<>(r, c)))
             return false;
-        return taxicabDist(r, c, dim / 2, dim / 2) <= r / 2 + 1;
+        return taxicabDist(r, c, dim / 2, dim / 2) <= dim / 2 + 1;
     }
 
     private int taxicabDist(int r1, int c1, int r2, int c2) {
