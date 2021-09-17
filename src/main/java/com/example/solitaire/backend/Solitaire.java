@@ -8,13 +8,13 @@ import static java.lang.Math.abs;
 
 public class Solitaire {
     private static final int dim = 7;
-    private static final HashSet<Pair<Integer, Integer>> britExclusive;
+    private static final HashSet<Pair<Integer, Integer>> europeanOnly;
 
     private SolitaireBoardType boardType;
     private HashSet<Pair<Integer, Integer>> pegs = new HashSet<>();
 
     static {
-        britExclusive = new HashSet<>(Arrays.asList(
+        europeanOnly = new HashSet<>(Arrays.asList(
                 new Pair<>(1, 1),
                 new Pair<>(1, 5),
                 new Pair<>(5, 1),
@@ -101,7 +101,7 @@ public class Solitaire {
     }
 
     private boolean inBoard(int r, int c) {
-        if (boardType != SolitaireBoardType.BRITISH && britExclusive.contains(new Pair<>(r, c)))
+        if (boardType != SolitaireBoardType.EUROPEAN && europeanOnly.contains(new Pair<>(r, c)))
             return false;
         return taxicabDist(r, c, dim / 2, dim / 2) <= dim / 2 + 1;
     }

@@ -60,13 +60,13 @@ public class SolitaireTest {
     }
 
     @Test
-    public void atTheBeginningBritishBoardHas36Pegs() {
-        assertEquals(36, solitaire.pegsLeftCount());
+    public void atTheBeginningBritishBoardHas32Pegs() {
+        assertEquals(32, solitaire.pegsLeftCount());
     }
 
     @Test
-    public void atTheBeginningEuropeanBoardHas32Pegs() {
+    public void atTheBeginningEuropeanBoardHas36Pegs() {
         solitaire = new Solitaire(SolitaireBoardType.EUROPEAN);
-        assertEquals(32, solitaire.pegsLeftCount());
+        assertEquals(36, solitaire.pegsLeftCount());
     }
 }
