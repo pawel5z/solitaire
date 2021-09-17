@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -140,5 +141,11 @@
       </children>
    </GridPane>
    <Separator layoutX="10.0" layoutY="217.0" />
-   <Label fx:id="statusLabel" text="Label" />
+   <Label fx:id="statusLabel" text="Label">
+      <VBox.margin>
+         <Insets />
+      </VBox.margin>
+      <padding>
+         <Insets left="5.0" right="5.0" />
+      </padding></Label>
 </VBox>
