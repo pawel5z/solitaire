@@ -121,4 +121,8 @@ public class Solitaire {
     public Set<Pair<Integer, Integer>> getPegPositions() {
         return Collections.unmodifiableSet(pegs);
     }
+
+    public int pegsLeftCount() {
+        return pegs.size();
+    }
 }
