@@ -54,7 +54,7 @@ public class SolitaireController {
     private Circle createPeg() {
         Circle peg = new Circle();
         peg.radiusProperty().bind(Bindings.min(board.widthProperty().divide(board.getColumnCount()),
-                board.heightProperty().divide(board.getRowCount())).divide(2));
+                board.heightProperty().divide(board.getRowCount())).divide(2).multiply(0.9));
         peg.setFill(Paint.valueOf("0x000000"));
 
         return peg;
