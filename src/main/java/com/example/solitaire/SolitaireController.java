@@ -7,15 +7,21 @@ import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Pair;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -164,5 +170,14 @@ public class SolitaireController {
     void newGameClicked(ActionEvent event) {
         setDisableBoardTypeRadios(false);
         setPegs(solitaire.getBoardType());
+    }
+
+    @FXML
+    void aboutGameClicked(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        stage.setScene(new Scene(new FXMLLoader(SolitaireController.class.getResource("about_game-view.fxml")).load()));
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(board.getScene().getWindow());
+        stage.show();
     }
 }

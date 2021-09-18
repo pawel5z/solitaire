@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+
+
+<DialogPane prefHeight="172.0" prefWidth="374.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <header>
+      <Label alignment="CENTER" text="About game">
+         <font>
+            <Font name="DejaVu Sans Bold" size="26.0" />
+         </font>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </Label>
+   </header>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+   <content>
+      <Hyperlink alignment="CENTER" contentDisplay="CENTER" text="https://en.wikipedia.org/wiki/Peg_solitaire" textAlignment="CENTER" wrapText="true">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </Hyperlink>
+   </content>
+</DialogPane>
