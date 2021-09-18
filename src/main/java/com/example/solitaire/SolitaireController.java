@@ -8,10 +8,7 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioMenuItem;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
@@ -36,6 +33,12 @@ public class SolitaireController {
     private Label statusLabel;
     @FXML
     private GridPane board;
+    @FXML
+    private ColorPicker tileColorPicker;
+    @FXML
+    private ColorPicker pegOutlineColorPicker;
+    @FXML
+    private ColorPicker pegFillingColorPicker;
 
     @FXML
      void initialize() {
@@ -45,6 +48,11 @@ public class SolitaireController {
             rect.widthProperty().bind(board.widthProperty().divide(board.getColumnCount()));
             rect.heightProperty().bind(board.heightProperty().divide(board.getRowCount()));
         }
+
+        // bind tiles' color to color pickers' value
+        for (var node : board.getChildren())
+            if (node instanceof Rectangle)
+                ((Rectangle) node).fillProperty().bind(tileColorPicker.valueProperty());
 
         setPegs(SolitaireBoardType.BRITISH);
     }
@@ -102,7 +110,8 @@ public class SolitaireController {
         Circle peg = new Circle();
         peg.radiusProperty().bind(Bindings.min(board.widthProperty().divide(board.getColumnCount()),
                 board.heightProperty().divide(board.getRowCount())).divide(2).multiply(0.9));
-        peg.setFill(Paint.valueOf("0x000000"));
+        peg.strokeProperty().bind(pegOutlineColorPicker.valueProperty());
+        peg.fillProperty().bind(pegFillingColorPicker.valueProperty());
 
         peg.setOnMouseClicked(mouseEvent -> {
             mouseEvent.consume();
