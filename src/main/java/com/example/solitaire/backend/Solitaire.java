@@ -58,7 +58,7 @@ public class Solitaire {
     }
 
     public boolean isWin() {
-        return isGameOver() && pegs.size() == 1;
+        return pegs.size() == 1;
     }
 
     public boolean isLose() {
