@@ -1,26 +1,36 @@
 package com.example.solitaire;
 
 import com.example.solitaire.backend.Solitaire;
+import com.example.solitaire.backend.SolitaireBoardType;
+
 import javafx.beans.binding.Bindings;
-import javafx.event.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SolitaireController {
     private Solitaire solitaire;
     private Circle markedPeg = null;
 
     @FXML
-    private ToggleGroup boardType;
+    private ToggleGroup boardTypeToggleGroup;
+    @FXML
+    private RadioMenuItem britishBoardRadio;
+    @FXML
+    private RadioMenuItem europeanBoardRadio;
     @FXML
     private Label statusLabel;
     @FXML
@@ -35,8 +45,7 @@ public class SolitaireController {
             rect.heightProperty().bind(board.heightProperty().divide(board.getRowCount()));
         }
 
-        setPegs();
-        updateStatusLabel();
+        setPegs(SolitaireBoardType.BRITISH);
     }
 
     @FXML
@@ -56,22 +65,36 @@ public class SolitaireController {
         board.add(markedPeg, GridPane.getColumnIndex(clickedField), GridPane.getRowIndex(clickedField));
         board.getChildren().remove(getPegByRowCol(posToRemove.getKey(), posToRemove.getValue()));
 
+
+        setDisableBoardTypeRadios(!solitaire.isGameOver());
+
         updateStatusLabel();
     }
 
-    private void setPegs() {
+    private void setPegs(SolitaireBoardType solitaireBoardType) {
         // remove any remaining pegs
-        for (var peg : board.getChildren()) {
+        ArrayList<Node> pegsToRemove = new ArrayList<>();
+        for (var peg : board.getChildren())
             if (peg instanceof Circle)
-                board.getChildren().remove(peg);
+                pegsToRemove.add(peg);
+        board.getChildren().removeAll(pegsToRemove);
+
+        solitaire = new Solitaire(solitaireBoardType);
+
+        // update fields according to game variant
+        for (var field : board.getChildren()) {
+            int r = GridPane.getRowIndex(field);
+            int c = GridPane.getColumnIndex(field);
+            field.setVisible(solitaire.inBoard(r, c));
         }
 
         // set up new pegs
-        solitaire = new Solitaire();
         for (Pair<Integer, Integer> pPos : solitaire.getPegPositions()) {
             Circle p = createPeg();
             board.add(p, pPos.getValue(), pPos.getKey());
         }
+
+        updateStatusLabel();
     }
 
     private Circle createPeg() {
@@ -105,5 +128,20 @@ public class SolitaireController {
         else
             newText = "Game in progress. " + solitaire.pegsLeftCount() + " pegs left.";
         statusLabel.setText(newText);
+    }
+
+    private void setDisableBoardTypeRadios(boolean b) {
+        britishBoardRadio.setDisable(b);
+        europeanBoardRadio.setDisable(b);
+    }
+
+    @FXML
+    void boardTypeToggled(ActionEvent event) {
+        RadioMenuItem clickedToggle = (RadioMenuItem) event.getTarget();
+        if (clickedToggle == britishBoardRadio) {
+            setPegs(SolitaireBoardType.BRITISH);
+        } else { // clickedToggle == europeanBoardRadio
+            setPegs(SolitaireBoardType.EUROPEAN);
+        }
     }
 }

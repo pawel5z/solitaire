@@ -65,12 +65,12 @@
        </Menu>
        <Menu mnemonicParsing="false" text="Settings">
             <items>
-               <RadioMenuItem mnemonicParsing="false" selected="true" text="British board">
+               <RadioMenuItem fx:id="britishBoardRadio" mnemonicParsing="false" onAction="#boardTypeToggled" selected="true" text="British board">
                   <toggleGroup>
-                     <ToggleGroup fx:id="boardType" />
+                     <ToggleGroup fx:id="boardTypeToggleGroup" />
                   </toggleGroup>
                </RadioMenuItem>
-               <RadioMenuItem mnemonicParsing="false" text="European board" toggleGroup="$boardType" />
+               <RadioMenuItem fx:id="europeanBoardRadio" mnemonicParsing="false" onAction="#boardTypeToggled" text="European board" toggleGroup="$boardTypeToggleGroup" />
             </items>
        </Menu>
          <Menu mnemonicParsing="false" text="Help">
