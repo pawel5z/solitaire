@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -14,6 +15,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Rectangle?>
 
 <VBox prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.solitaire.SolitaireController">
@@ -71,6 +73,34 @@
                   </toggleGroup>
                </RadioMenuItem>
                <RadioMenuItem fx:id="europeanBoardRadio" mnemonicParsing="false" onAction="#boardTypeToggled" text="European board" toggleGroup="$boardTypeToggleGroup" />
+               <SeparatorMenuItem mnemonicParsing="false" />
+               <MenuItem mnemonicParsing="false" text="Tiles">
+                  <graphic>
+                     <ColorPicker fx:id="tileColorPicker">
+                        <value>
+                           <Color red="0.26955410838127136" green="0.4488760828971863" blue="0.9868420958518982" />
+                        </value>
+                     </ColorPicker>
+                  </graphic>
+               </MenuItem>
+               <MenuItem mnemonicParsing="false" text="Peg's outline">
+                  <graphic>
+                     <ColorPicker fx:id="pegOutlineColorPicker">
+                        <value>
+                           <Color />
+                        </value>
+                     </ColorPicker>
+                  </graphic>
+               </MenuItem>
+               <MenuItem mnemonicParsing="false" text="Peg's filling">
+                  <graphic>
+                     <ColorPicker fx:id="pegFillingColorPicker">
+                        <value>
+                           <Color red="0.7236841917037964" green="0.7236841917037964" blue="0.7236841917037964" />
+                        </value>
+                     </ColorPicker>
+                  </graphic>
+               </MenuItem>
             </items>
        </Menu>
          <Menu mnemonicParsing="false" text="Help">
