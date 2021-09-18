@@ -2,15 +2,14 @@ package com.example.solitaire;
 
 import com.example.solitaire.backend.Solitaire;
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ObservableDoubleValue;
-import javafx.beans.value.ObservableIntegerValue;
-import javafx.event.EventType;
+import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -37,6 +36,7 @@ public class SolitaireController {
         }
 
         setPegs();
+        updateStatusLabel();
     }
 
     @FXML
@@ -55,6 +55,8 @@ public class SolitaireController {
         board.getChildren().remove(markedPeg);
         board.add(markedPeg, GridPane.getColumnIndex(clickedField), GridPane.getRowIndex(clickedField));
         board.getChildren().remove(getPegByRowCol(posToRemove.getKey(), posToRemove.getValue()));
+
+        updateStatusLabel();
     }
 
     private void setPegs() {
@@ -92,5 +94,16 @@ public class SolitaireController {
                 return (Circle) peg;
         }
         return null;
+    }
+
+    private void updateStatusLabel() {
+        String newText;
+        if (solitaire.isWin())
+            newText = "You win!";
+        else if (solitaire.isLose())
+            newText = "Game over. " + solitaire.pegsLeftCount() + " pegs left.";
+        else
+            newText = "Game in progress. " + solitaire.pegsLeftCount() + " pegs left.";
+        statusLabel.setText(newText);
     }
 }
