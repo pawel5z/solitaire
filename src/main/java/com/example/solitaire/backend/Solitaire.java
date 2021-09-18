@@ -8,17 +8,22 @@ import static java.lang.Math.abs;
 
 public class Solitaire {
     private static final int dim = 7;
-    private static final HashSet<Pair<Integer, Integer>> europeanOnly;
+    private static final ArrayList<Pair<Integer, Integer>> europeanOnly;
+    private static final ArrayList<Pair<Integer, Integer>> europeanHolesSolvable;
 
     private SolitaireBoardType boardType;
     private HashSet<Pair<Integer, Integer>> pegs = new HashSet<>();
 
     static {
-        europeanOnly = new HashSet<>(Arrays.asList(
+        europeanOnly = new ArrayList<>(Arrays.asList(
                 new Pair<>(1, 1),
                 new Pair<>(1, 5),
                 new Pair<>(5, 1),
                 new Pair<>(5, 5)));
+        europeanHolesSolvable = new ArrayList<>(Arrays.asList(
+                new Pair<>(0, 2),
+                new Pair<>(1, 3),
+                new Pair<>(2, 3)));
     }
 
     public Solitaire() {
@@ -31,8 +36,11 @@ public class Solitaire {
             for (int c = 0; c < dim; c++)
                 if (inBoard(r, c))
                     pegs.add(new Pair<>(r, c));
-        // remove the middle peg
-        pegs.remove(new Pair<>(dim / 2, dim / 2));
+
+        switch (boardType) {
+            case BRITISH -> pegs.remove(new Pair<>(dim / 2, dim / 2));
+            case EUROPEAN -> pegs.remove(applyRandomElementaryTransform(europeanHolesSolvable.get(new Random().nextInt(europeanHolesSolvable.size()))));
+        }
     }
 
     public Pair<Integer, Integer> move(int fromR, int fromC, int toR, int toC) {
@@ -124,5 +132,16 @@ public class Solitaire {
 
     public int pegsLeftCount() {
         return pegs.size();
+    }
+
+    private Pair<Integer, Integer> applyRandomElementaryTransform(int r, int c) {
+        Random random = new Random();
+        int rRand = random.nextInt(2);
+        int cRand = random.nextInt(2);
+        return new Pair<>(rRand * r + (1 - rRand) * (dim - 1 - r), cRand * c + (1 - cRand) * (dim - 1 - c));
+    }
+
+    private Pair<Integer, Integer> applyRandomElementaryTransform(Pair<Integer, Integer> p) {
+        return applyRandomElementaryTransform(p.getKey(), p.getValue());
     }
 }

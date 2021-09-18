@@ -19,7 +19,7 @@ public class SolitaireTest {
     }
 
     @Test
-    public void pegIsTakenOff() {
+    public void pegIsTakenOffInEuropeanVariantOnFirstMove() {
         int pegsNumberBefore = solitaire.pegsLeftCount();
         assertNotNull(solitaire.move(3, 5, 3, 3));
         assertTrue(solitaire.isFieldOccupied(3, 3));
@@ -55,7 +55,7 @@ public class SolitaireTest {
     }
 
     @Test
-    public void atTheBeginningMiddleFieldIsNotOccupied() {
+    public void atTheBeginningInEuropeanVariantMiddleFieldIsNotOccupied() {
         assertFalse(solitaire.isFieldOccupied(3, 3));
     }
 
