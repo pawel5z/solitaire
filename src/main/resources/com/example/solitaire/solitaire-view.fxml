@@ -19,11 +19,11 @@
 <VBox prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.solitaire.SolitaireController">
    <MenuBar>
      <menus>
-       <Menu mnemonicParsing="false" text="Game">
+       <Menu text="_Game">
          <items>
-           <MenuItem onAction="#newGameClicked" text="New" />
+           <MenuItem onAction="#newGameClicked" text="_New" />
                <SeparatorMenuItem mnemonicParsing="false" />
-               <MenuItem onAction="#endGameClicked" text="End" />
+               <MenuItem onAction="#endGameClicked" text="_End" />
          </items>
        </Menu>
        <Menu mnemonicParsing="false" text="Moves">
