@@ -21,9 +21,9 @@
      <menus>
        <Menu mnemonicParsing="false" text="Game">
          <items>
-           <MenuItem text="New" />
+           <MenuItem onAction="#newGameClicked" text="New" />
                <SeparatorMenuItem mnemonicParsing="false" />
-               <MenuItem text="End" />
+               <MenuItem onAction="#endGameClicked" text="End" />
          </items>
        </Menu>
        <Menu mnemonicParsing="false" text="Moves">

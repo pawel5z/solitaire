@@ -3,6 +3,7 @@ package com.example.solitaire;
 import com.example.solitaire.backend.Solitaire;
 import com.example.solitaire.backend.SolitaireBoardType;
 
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -143,5 +144,16 @@ public class SolitaireController {
         } else { // clickedToggle == europeanBoardRadio
             setPegs(SolitaireBoardType.EUROPEAN);
         }
+    }
+
+    @FXML
+    void endGameClicked(ActionEvent event) {
+        Platform.exit();
+    }
+
+    @FXML
+    void newGameClicked(ActionEvent event) {
+        setDisableBoardTypeRadios(false);
+        setPegs(solitaire.getBoardType());
     }
 }
