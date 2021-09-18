@@ -102,8 +102,8 @@
      </rowConstraints>
       <children>
          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" onMouseClicked="#fieldClicked" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="43.0" layoutY="39.0" onMouseClicked="#fieldClicked" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" />
-         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="43.0" layoutY="39.0" onMouseClicked="#fieldClicked" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="4" />
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="43.0" layoutY="39.0" onMouseClicked="#fieldClicked" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="43.0" layoutY="39.0" onMouseClicked="#fieldClicked" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="4" GridPane.rowIndex="0" />
          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="43.0" layoutY="39.0" onMouseClicked="#fieldClicked" stroke="BLACK" strokeType="INSIDE" visible="false" width="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="43.0" layoutY="39.0" onMouseClicked="#fieldClicked" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="43.0" layoutY="39.0" onMouseClicked="#fieldClicked" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
