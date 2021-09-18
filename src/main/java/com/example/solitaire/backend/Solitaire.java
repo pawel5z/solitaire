@@ -100,7 +100,7 @@ public class Solitaire {
         return inBoard(p.getKey(), p.getValue());
     }
 
-    private boolean inBoard(int r, int c) {
+    public boolean inBoard(int r, int c) {
         if (boardType != SolitaireBoardType.EUROPEAN && europeanOnly.contains(new Pair<>(r, c)))
             return false;
         return taxicabDist(r, c, dim / 2, dim / 2) <= dim / 2 + 1;
