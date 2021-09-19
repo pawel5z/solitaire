@@ -181,4 +181,14 @@ public class SolitaireController {
         stage.initOwner(board.getScene().getWindow());
         stage.show();
     }
+
+    @FXML
+    void aboutAppClicked(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        stage.setScene(new Scene(new FXMLLoader(SolitaireController.class.getResource("about_app-view.fxml")).load()));
+        stage.setTitle("About app");
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(board.getScene().getWindow());
+        stage.show();
+    }
 }

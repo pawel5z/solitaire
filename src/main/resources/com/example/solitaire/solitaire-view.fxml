@@ -106,7 +106,7 @@
          <Menu mnemonicParsing="false" text="Help">
            <items>
              <MenuItem mnemonicParsing="false" onAction="#aboutGameClicked" text="About game" />
-               <MenuItem mnemonicParsing="false" text="About app" />
+               <MenuItem mnemonicParsing="false" onAction="#aboutAppClicked" text="About app" />
            </items>
          </Menu>
      </menus>
