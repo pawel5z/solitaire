@@ -6,9 +6,10 @@ import javafx.scene.control.ContextMenu;
 import java.io.IOException;
 
 public class PegContextMenu extends ContextMenu {
-    public PegContextMenu() throws IOException {
+    public PegContextMenu(Object controller) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("peg-context_menu-view.fxml"));
         loader.setRoot(this);
+        loader.setController(controller);
         loader.load();
     }
 }

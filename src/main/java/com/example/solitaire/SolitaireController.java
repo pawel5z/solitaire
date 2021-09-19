@@ -6,6 +6,7 @@ import com.example.solitaire.backend.SolitaireBoardType;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -46,9 +47,12 @@ public class SolitaireController {
     private ColorPicker pegOutlineColorPicker;
     @FXML
     private ColorPicker pegFillingColorPicker;
-    private PegContextMenu pegContextMenu = new PegContextMenu();
+    private PegContextMenu pegContextMenu;
 
     public SolitaireController() throws IOException {
+        PegContextMenuController pcmController = new PegContextMenuController();
+        pegContextMenu = new PegContextMenu(pcmController);
+        pegContextMenu.addEventHandler(PegRightClickedEvent.ANY, pcmController);
     }
 
     @FXML
@@ -68,6 +72,21 @@ public class SolitaireController {
         setPegs(SolitaireBoardType.BRITISH);
     }
 
+    private void attemptMove(Circle peg, Rectangle field) {
+        Pair<Integer, Integer> posToRemove = solitaire.move(
+                GridPane.getRowIndex(markedPeg),
+                GridPane.getColumnIndex(markedPeg),
+                GridPane.getRowIndex(field),
+                GridPane.getColumnIndex(field));
+        if (posToRemove == null)
+            return;
+        board.getChildren().remove(markedPeg);
+        board.add(markedPeg, GridPane.getColumnIndex(field), GridPane.getRowIndex(field));
+        board.getChildren().remove(getPegByRowCol(posToRemove.getKey(), posToRemove.getValue()));
+        setDisableBoardTypeRadios(!solitaire.isGameOver());
+        updateStatusLabel();
+    }
+
     @FXML
     void fieldClicked(MouseEvent event) {
         event.consume();
@@ -75,20 +94,7 @@ public class SolitaireController {
             return;
         }
         Rectangle clickedField = (Rectangle) event.getTarget();
-        Pair<Integer, Integer> posToRemove = solitaire.move(GridPane.getRowIndex(markedPeg),
-                                                            GridPane.getColumnIndex(markedPeg),
-                                                            GridPane.getRowIndex(clickedField),
-                                                            GridPane.getColumnIndex(clickedField));
-        if (posToRemove == null)
-            return;
-        board.getChildren().remove(markedPeg);
-        board.add(markedPeg, GridPane.getColumnIndex(clickedField), GridPane.getRowIndex(clickedField));
-        board.getChildren().remove(getPegByRowCol(posToRemove.getKey(), posToRemove.getValue()));
-
-
-        setDisableBoardTypeRadios(!solitaire.isGameOver());
-
-        updateStatusLabel();
+        attemptMove(markedPeg, clickedField);
     }
 
     private void setPegs(SolitaireBoardType solitaireBoardType) {
@@ -130,6 +136,7 @@ public class SolitaireController {
             pegContextMenu.hide();
             markedPeg = (Circle) mouseEvent.getTarget();
             if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                pegContextMenu.fireEvent(new PegRightClickedEvent(PegRightClickedEvent.ANY, peg, solitaire));
                 pegContextMenu.show(peg, mouseEvent.getScreenX(), mouseEvent.getScreenY());
             }
         });
@@ -137,11 +144,17 @@ public class SolitaireController {
         return peg;
     }
 
+    private Rectangle getFieldByRowCol(int r, int c) {
+        for (var field : board.getChildren())
+            if (field instanceof Rectangle && GridPane.getRowIndex(field) == r && GridPane.getColumnIndex(field) == c)
+                return (Rectangle) field;
+        return null;
+    }
+
     private Circle getPegByRowCol(int r, int c) {
-        for (var peg : board.getChildren()) {
+        for (var peg : board.getChildren())
             if (peg instanceof Circle && GridPane.getRowIndex(peg) == r && GridPane.getColumnIndex(peg) == c)
                 return (Circle) peg;
-        }
         return null;
     }
 

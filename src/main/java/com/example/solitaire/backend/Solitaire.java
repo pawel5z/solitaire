@@ -43,7 +43,11 @@ public class Solitaire {
         }
     }
 
-    public Pair<Integer, Integer> move(int fromR, int fromC, int toR, int toC) {
+    public Pair<Integer, Integer> isMoveLegal(Pair<Integer, Integer> from, Pair<Integer, Integer> to) {
+        return isMoveLegal(from.getKey(), from.getValue(), to.getKey(), to.getValue());
+    }
+
+    public Pair<Integer, Integer> isMoveLegal(int fromR, int fromC, int toR, int toC) {
         if (!inBoard(fromR, fromC) || !inBoard(toR, toC))
             return null;
         int midR = (fromR + toR) / 2;
@@ -54,15 +58,26 @@ public class Solitaire {
             return null;
         }
         if (!pegs.contains(new Pair<>(fromR, fromC))
-            || !pegs.contains(new Pair<>(midR, midC))
-            || pegs.contains(new Pair<>(toR, toC)))
+                || !pegs.contains(new Pair<>(midR, midC))
+                || pegs.contains(new Pair<>(toR, toC)))
+            return null;
+        return new Pair<>(midR, midC);
+    }
+
+    public Pair<Integer, Integer> move(Pair<Integer, Integer> from, Pair<Integer, Integer> to) {
+        return move(from.getKey(), from.getValue(), to.getKey(), to.getValue());
+    }
+
+    public Pair<Integer, Integer> move(int fromR, int fromC, int toR, int toC) {
+        Pair<Integer, Integer> mid = isMoveLegal(fromR, fromC, toR, toC);
+        if (mid == null)
             return null;
 
         // move is legal
         pegs.remove(new Pair<>(fromR, fromC));
         pegs.add(new Pair<>(toR, toC));
-        pegs.remove(new Pair<>(midR, midC));
-        return new Pair<>(midR, midC);
+        pegs.remove(mid);
+        return mid;
     }
 
     public boolean isWin() {
