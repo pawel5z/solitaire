@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
@@ -45,6 +46,10 @@ public class SolitaireController {
     private ColorPicker pegOutlineColorPicker;
     @FXML
     private ColorPicker pegFillingColorPicker;
+    private PegContextMenu pegContextMenu = new PegContextMenu();
+
+    public SolitaireController() throws IOException {
+    }
 
     @FXML
      void initialize() {
@@ -122,7 +127,11 @@ public class SolitaireController {
 
         peg.setOnMouseClicked(mouseEvent -> {
             mouseEvent.consume();
+            pegContextMenu.hide();
             markedPeg = (Circle) mouseEvent.getTarget();
+            if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                pegContextMenu.show(peg, mouseEvent.getScreenX(), mouseEvent.getScreenY());
+            }
         });
 
         return peg;

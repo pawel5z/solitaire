@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.input.KeyCodeCombination?>
+
+<fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.solitaire.PegContextMenuController">
+  <items>
+      <MenuItem mnemonicParsing="false" onAction="#jumpUpClicked" text="Jump up">
+         <accelerator>
+            <KeyCodeCombination alt="UP" code="UP" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+         </accelerator>
+      </MenuItem>
+      <MenuItem mnemonicParsing="false" onAction="#jumpDownClicked" text="Jump down">
+         <accelerator>
+            <KeyCodeCombination alt="UP" code="DOWN" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+         </accelerator>
+      </MenuItem>
+      <MenuItem mnemonicParsing="false" onAction="#jumpLeftClicked" text="Jump left">
+         <accelerator>
+            <KeyCodeCombination alt="UP" code="LEFT" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+         </accelerator>
+      </MenuItem>
+      <MenuItem mnemonicParsing="false" onAction="#jumpRightClicked" text="Jump right">
+         <accelerator>
+            <KeyCodeCombination alt="UP" code="RIGHT" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+         </accelerator>
+      </MenuItem>
+  </items>
+</fx:root>
