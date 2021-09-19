@@ -115,9 +115,10 @@ public class SolitaireController {
     private Circle createPeg() {
         Circle peg = new Circle();
         peg.radiusProperty().bind(Bindings.min(board.widthProperty().divide(board.getColumnCount()),
-                board.heightProperty().divide(board.getRowCount())).divide(2).multiply(0.9));
+                board.heightProperty().divide(board.getRowCount())).divide(2).multiply(0.8));
         peg.strokeProperty().bind(pegOutlineColorPicker.valueProperty());
         peg.fillProperty().bind(pegFillingColorPicker.valueProperty());
+        peg.setStrokeWidth(5);
 
         peg.setOnMouseClicked(mouseEvent -> {
             mouseEvent.consume();
