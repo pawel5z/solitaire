@@ -12,7 +12,7 @@ public class SolitaireApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(SolitaireApplication.class.getResource("solitaire-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("solitaire-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 800);
         stage.setTitle(title);
         stage.setScene(scene);
