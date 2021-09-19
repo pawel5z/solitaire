@@ -176,6 +176,7 @@ public class SolitaireController {
     void aboutGameClicked(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         stage.setScene(new Scene(new FXMLLoader(SolitaireController.class.getResource("about_game-view.fxml")).load()));
+        stage.setTitle("About game");
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(board.getScene().getWindow());
         stage.show();

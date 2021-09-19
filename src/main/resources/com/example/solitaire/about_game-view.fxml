@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.DialogPane?>
-<?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<DialogPane prefHeight="172.0" prefWidth="374.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-   <header>
-      <Label alignment="CENTER" text="About game">
-         <font>
-            <Font name="DejaVu Sans Bold" size="26.0" />
-         </font>
-         <padding>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="252.0" prefWidth="402.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.solitaire.AboutGameController">
+   <center>
+      <VBox alignment="CENTER" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextArea editable="false" minHeight="0.0" minWidth="0.0" text="From `https://en.wikipedia.org/wiki/Peg_solitaire`.&#10;&#10;The objective is, making valid moves, to empty the entire board except for the last solitary peg.&#10;&#10;A valid move is to jump a peg orthogonally over an adjacent peg into a hole two positions away and then to remove the jumped peg.&#10;&#10;To do this, click on the peg you want to move.&#10;Next, click on the hole two positions away.&#10;Peg between clicked peg and hole will be removed." wrapText="true" VBox.vgrow="ALWAYS" />
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <VBox alignment="CENTER" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#okButtonClicked" text="OK" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+         </children>
+         <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </Label>
-   </header>
-   <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-   </padding>
-   <content>
-      <Hyperlink alignment="CENTER" contentDisplay="CENTER" text="https://en.wikipedia.org/wiki/Peg_solitaire" textAlignment="CENTER" wrapText="true">
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </Hyperlink>
-   </content>
-</DialogPane>
+         </BorderPane.margin>
+      </VBox>
+   </bottom>
+</BorderPane>
