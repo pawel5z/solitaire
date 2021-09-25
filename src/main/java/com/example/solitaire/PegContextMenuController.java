@@ -1,6 +1,7 @@
 package com.example.solitaire;
 
 import com.example.solitaire.backend.Solitaire;
+import com.example.solitaire.event_aggregator.EventAggregator;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -31,21 +32,42 @@ public class PegContextMenuController implements EventHandler<PegRightClickedEve
 
     @FXML
     void jumpUpClicked(ActionEvent event) {
+        EventAggregator.getInstance().notify(
+            ContextMenuJumpChosenEvent.class,
+            new ContextMenuJumpChosenEvent(
+                pegClicked,
+                GridPane.getRowIndex(pegClicked) - 2,
+                    GridPane.getColumnIndex(pegClicked)));
     }
 
     @FXML
     void jumpDownClicked(ActionEvent event) {
-
+        EventAggregator.getInstance().notify(
+                ContextMenuJumpChosenEvent.class,
+                new ContextMenuJumpChosenEvent(
+                        pegClicked,
+                        GridPane.getRowIndex(pegClicked) + 2,
+                        GridPane.getColumnIndex(pegClicked)));
     }
 
     @FXML
     void jumpLeftClicked(ActionEvent event) {
-
+        EventAggregator.getInstance().notify(
+                ContextMenuJumpChosenEvent.class,
+                new ContextMenuJumpChosenEvent(
+                        pegClicked,
+                        GridPane.getRowIndex(pegClicked),
+                        GridPane.getColumnIndex(pegClicked) - 2));
     }
 
     @FXML
     void jumpRightClicked(ActionEvent event) {
-
+        EventAggregator.getInstance().notify(
+                ContextMenuJumpChosenEvent.class,
+                new ContextMenuJumpChosenEvent(
+                        pegClicked,
+                        GridPane.getRowIndex(pegClicked),
+                        GridPane.getColumnIndex(pegClicked) + 2));
     }
 
     @Override

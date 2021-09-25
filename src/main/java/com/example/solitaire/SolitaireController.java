@@ -3,6 +3,8 @@ package com.example.solitaire;
 import com.example.solitaire.backend.Solitaire;
 import com.example.solitaire.backend.SolitaireBoardType;
 
+import com.example.solitaire.event_aggregator.EventAggregator;
+import com.example.solitaire.event_aggregator.ISubscriber;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -22,12 +24,13 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import org.junit.runner.manipulation.Ordering;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SolitaireController {
+public class SolitaireController implements ISubscriber {
     private Solitaire solitaire;
     private Circle markedPeg = null;
 
@@ -53,6 +56,8 @@ public class SolitaireController {
         PegContextMenuController pcmController = new PegContextMenuController();
         pegContextMenu = new PegContextMenu(pcmController);
         pegContextMenu.addEventHandler(PegRightClickedEvent.ANY, pcmController);
+
+        EventAggregator.getInstance().addSubscriber(ContextMenuJumpChosenEvent.class, this);
     }
 
     @FXML
@@ -213,5 +218,13 @@ public class SolitaireController {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(board.getScene().getWindow());
         stage.show();
+    }
+
+    @Override
+    public void handle(Object event) {
+        if (event instanceof ContextMenuJumpChosenEvent) {
+            ContextMenuJumpChosenEvent e = (ContextMenuJumpChosenEvent) event;
+            attemptMove(e.getFrom(), getFieldByRowCol(e.getToR(), e.getToC()));
+        }
     }
 }
