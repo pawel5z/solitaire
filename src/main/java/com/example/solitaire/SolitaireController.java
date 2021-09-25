@@ -18,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -139,7 +140,7 @@ public class SolitaireController implements ISubscriber {
         peg.setOnMouseClicked(mouseEvent -> {
             mouseEvent.consume();
             pegContextMenu.hide();
-            markedPeg = (Circle) mouseEvent.getTarget();
+            markPeg((Circle) mouseEvent.getTarget());
             if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                 pegContextMenu.fireEvent(new PegRightClickedEvent(PegRightClickedEvent.ANY, peg, solitaire));
                 pegContextMenu.show(peg, mouseEvent.getScreenX(), mouseEvent.getScreenY());
@@ -226,5 +227,18 @@ public class SolitaireController implements ISubscriber {
             ContextMenuJumpChosenEvent e = (ContextMenuJumpChosenEvent) event;
             attemptMove(e.getFrom(), getFieldByRowCol(e.getToR(), e.getToC()));
         }
+    }
+
+    private void markPeg(Circle peg) {
+        if (markedPeg != null)
+            markedPeg.fillProperty().bind(pegFillingColorPicker.valueProperty());
+        peg.fillProperty().unbind();
+        Color negative = new Color(
+            1 - pegFillingColorPicker.getValue().getRed(),
+            1 - pegFillingColorPicker.getValue().getGreen(),
+            1 - pegFillingColorPicker.getValue().getBlue(),
+            1);
+        peg.setFill(Paint.valueOf(negative.toString()));
+        markedPeg = peg;
     }
 }
