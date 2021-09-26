@@ -47,19 +47,19 @@
                      <KeyCodeCombination alt="ANY" code="RIGHT" control="UP" meta="UP" shift="UP" shortcut="UP" />
                   </accelerator></MenuItem>
                <SeparatorMenuItem mnemonicParsing="false" />
-           <MenuItem mnemonicParsing="false" text="Jump up">
+           <MenuItem fx:id="jumpUpItem" mnemonicParsing="false" onAction="#jumpClicked" text="Jump up">
                   <accelerator>
                      <KeyCodeCombination alt="UP" code="UP" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
                   </accelerator></MenuItem>
-               <MenuItem mnemonicParsing="false" text="Jump down">
+               <MenuItem fx:id="jumpDownItem" mnemonicParsing="false" onAction="#jumpClicked" text="Jump down">
                   <accelerator>
                      <KeyCodeCombination alt="UP" code="DOWN" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
                   </accelerator></MenuItem>
-               <MenuItem mnemonicParsing="false" text="Jump left">
+               <MenuItem fx:id="jumpLeftItem" mnemonicParsing="false" onAction="#jumpClicked" text="Jump left">
                   <accelerator>
                      <KeyCodeCombination alt="UP" code="LEFT" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
                   </accelerator></MenuItem>
-               <MenuItem mnemonicParsing="false" text="Jump right">
+               <MenuItem fx:id="jumpRightItem" mnemonicParsing="false" onAction="#jumpClicked" text="Jump right">
                   <accelerator>
                      <KeyCodeCombination alt="UP" code="RIGHT" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
                   </accelerator></MenuItem>

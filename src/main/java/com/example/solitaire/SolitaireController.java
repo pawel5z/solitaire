@@ -8,11 +8,9 @@ import com.example.solitaire.event_aggregator.ISubscriber;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
@@ -25,11 +23,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Pair;
-import org.junit.runner.manipulation.Ordering;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class SolitaireController implements ISubscriber {
     private Solitaire solitaire;
@@ -52,6 +48,14 @@ public class SolitaireController implements ISubscriber {
     @FXML
     private ColorPicker pegFillingColorPicker;
     private PegContextMenu pegContextMenu;
+    @FXML
+    private MenuItem jumpUpItem;
+    @FXML
+    private MenuItem jumpDownItem;
+    @FXML
+    private MenuItem jumpLeftItem;
+    @FXML
+    private MenuItem jumpRightItem;
 
     public SolitaireController() throws IOException {
         PegContextMenuController pcmController = new PegContextMenuController();
@@ -125,6 +129,13 @@ public class SolitaireController implements ISubscriber {
             Circle p = createPeg();
             board.add(p, pPos.getValue(), pPos.getKey());
         }
+
+        // mark the first peg found in the grid
+        for (var node : board.getChildren())
+            if (node instanceof Circle) {
+                markPeg((Circle) node);
+                break;
+            }
 
         updateStatusLabel();
     }
@@ -240,5 +251,38 @@ public class SolitaireController implements ISubscriber {
             1);
         peg.setFill(Paint.valueOf(negative.toString()));
         markedPeg = peg;
+    }
+
+    @FXML
+    void jumpClicked(ActionEvent event) {
+        event.consume();
+        if (event.getTarget() == jumpUpItem)
+            EventAggregator.getInstance().notify(
+                ContextMenuJumpChosenEvent.class,
+                new ContextMenuJumpChosenEvent(
+                    markedPeg,
+                    GridPane.getRowIndex(markedPeg) - 2,
+                    GridPane.getColumnIndex(markedPeg)));
+        else if (event.getTarget() == jumpDownItem)
+            EventAggregator.getInstance().notify(
+                ContextMenuJumpChosenEvent.class,
+                new ContextMenuJumpChosenEvent(
+                    markedPeg,
+                    GridPane.getRowIndex(markedPeg) + 2,
+                    GridPane.getColumnIndex(markedPeg)));
+        else if (event.getTarget() == jumpLeftItem)
+            EventAggregator.getInstance().notify(
+                ContextMenuJumpChosenEvent.class,
+                new ContextMenuJumpChosenEvent(
+                    markedPeg,
+                    GridPane.getRowIndex(markedPeg),
+                    GridPane.getColumnIndex(markedPeg) - 2));
+        else if (event.getTarget() == jumpRightItem)
+            EventAggregator.getInstance().notify(
+                ContextMenuJumpChosenEvent.class,
+                new ContextMenuJumpChosenEvent(
+                    markedPeg,
+                    GridPane.getRowIndex(markedPeg),
+                    GridPane.getColumnIndex(markedPeg) + 2));
     }
 }
