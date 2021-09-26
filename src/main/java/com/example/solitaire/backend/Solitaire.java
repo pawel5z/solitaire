@@ -12,7 +12,7 @@ public class Solitaire {
     private static final ArrayList<Pair<Integer, Integer>> europeanHolesSolvable;
 
     private SolitaireBoardType boardType;
-    private HashSet<Pair<Integer, Integer>> pegs = new HashSet<>();
+    private final HashSet<Pair<Integer, Integer>> pegs = new HashSet<>();
 
     static {
         europeanOnly = new ArrayList<>(Arrays.asList(

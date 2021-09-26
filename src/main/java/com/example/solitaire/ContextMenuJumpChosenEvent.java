@@ -1,20 +1,12 @@
 package com.example.solitaire;
 
-import javafx.scene.shape.Circle;
-
 public class ContextMenuJumpChosenEvent {
-    private Circle from;
-    private int toR;
-    private int toC;
+    private final int toR;
+    private final int toC;
 
-    public ContextMenuJumpChosenEvent(Circle from, int toR, int toC) {
-        this.from = from;
+    public ContextMenuJumpChosenEvent(int toR, int toC) {
         this.toR = toR;
         this.toC = toC;
-    }
-
-    public Circle getFrom() {
-        return from;
     }
 
     public int getToR() {

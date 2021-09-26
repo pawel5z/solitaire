@@ -49,7 +49,7 @@ public class SolitaireController implements ISubscriber {
     private ColorPicker pegOutlineColorPicker;
     @FXML
     private ColorPicker pegFillingColorPicker;
-    private PegContextMenu pegContextMenu;
+    private final PegContextMenu pegContextMenu;
     @FXML
     private MenuItem jumpUpItem;
     @FXML
@@ -92,7 +92,7 @@ public class SolitaireController implements ISubscriber {
         setPegs(SolitaireBoardType.BRITISH);
     }
 
-    private void attemptMove(Circle peg, Rectangle field) {
+    private void attemptMove(Rectangle field) {
         Pair<Integer, Integer> posToRemove = solitaire.move(
                 GridPane.getRowIndex(markedPeg),
                 GridPane.getColumnIndex(markedPeg),
@@ -114,7 +114,7 @@ public class SolitaireController implements ISubscriber {
             return;
         }
         Rectangle clickedField = (Rectangle) event.getTarget();
-        attemptMove(markedPeg, clickedField);
+        attemptMove(clickedField);
     }
 
     private void setPegs(SolitaireBoardType solitaireBoardType) {
@@ -212,18 +212,18 @@ public class SolitaireController implements ISubscriber {
     }
 
     @FXML
-    void endGameClicked(ActionEvent event) {
+    void endGameClicked() {
         Platform.exit();
     }
 
     @FXML
-    void newGameClicked(ActionEvent event) {
+    void newGameClicked() {
         setDisableBoardTypeRadios(false);
         setPegs(solitaire.getBoardType());
     }
 
     @FXML
-    void aboutGameClicked(ActionEvent event) throws IOException {
+    void aboutGameClicked() throws IOException {
         Stage stage = new Stage();
         stage.setScene(new Scene(new FXMLLoader(getClass().getResource("about_game-view.fxml")).load()));
         stage.setTitle("About game");
@@ -233,7 +233,7 @@ public class SolitaireController implements ISubscriber {
     }
 
     @FXML
-    void aboutAppClicked(ActionEvent event) throws IOException {
+    void aboutAppClicked() throws IOException {
         Stage stage = new Stage();
         stage.setScene(new Scene(new FXMLLoader(getClass().getResource("about_app-view.fxml")).load()));
         stage.setTitle("About app");
@@ -244,9 +244,8 @@ public class SolitaireController implements ISubscriber {
 
     @Override
     public void handle(Object event) {
-        if (event instanceof ContextMenuJumpChosenEvent) {
-            ContextMenuJumpChosenEvent e = (ContextMenuJumpChosenEvent) event;
-            attemptMove(e.getFrom(), getFieldByRowCol(e.getToR(), e.getToC()));
+        if (event instanceof ContextMenuJumpChosenEvent e) {
+            attemptMove(getFieldByRowCol(e.getToR(), e.getToC()));
         }
     }
 
@@ -270,29 +269,25 @@ public class SolitaireController implements ISubscriber {
             EventAggregator.getInstance().notify(
                 ContextMenuJumpChosenEvent.class,
                 new ContextMenuJumpChosenEvent(
-                    markedPeg,
-                    GridPane.getRowIndex(markedPeg) - 2,
+                        GridPane.getRowIndex(markedPeg) - 2,
                     GridPane.getColumnIndex(markedPeg)));
         else if (event.getTarget() == jumpDownItem)
             EventAggregator.getInstance().notify(
                 ContextMenuJumpChosenEvent.class,
                 new ContextMenuJumpChosenEvent(
-                    markedPeg,
-                    GridPane.getRowIndex(markedPeg) + 2,
+                        GridPane.getRowIndex(markedPeg) + 2,
                     GridPane.getColumnIndex(markedPeg)));
         else if (event.getTarget() == jumpLeftItem)
             EventAggregator.getInstance().notify(
                 ContextMenuJumpChosenEvent.class,
                 new ContextMenuJumpChosenEvent(
-                    markedPeg,
-                    GridPane.getRowIndex(markedPeg),
+                        GridPane.getRowIndex(markedPeg),
                     GridPane.getColumnIndex(markedPeg) - 2));
         else if (event.getTarget() == jumpRightItem)
             EventAggregator.getInstance().notify(
                 ContextMenuJumpChosenEvent.class,
                 new ContextMenuJumpChosenEvent(
-                    markedPeg,
-                    GridPane.getRowIndex(markedPeg),
+                        GridPane.getRowIndex(markedPeg),
                     GridPane.getColumnIndex(markedPeg) + 2));
     }
 

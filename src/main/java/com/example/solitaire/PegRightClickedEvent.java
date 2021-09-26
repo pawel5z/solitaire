@@ -8,8 +8,8 @@ import javafx.scene.shape.Circle;
 public class PegRightClickedEvent extends Event {
     public static final EventType<PegRightClickedEvent> ANY = new EventType<>(Event.ANY, "ANY");
 
-    private Circle pegClicked;
-    private Solitaire solitaire;
+    private final Circle pegClicked;
+    private final Solitaire solitaire;
 
     public PegRightClickedEvent(EventType<? extends Event> eventType, Circle pegClicked, Solitaire solitaire) {
         super(eventType);
