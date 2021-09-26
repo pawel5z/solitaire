@@ -30,19 +30,19 @@
        </Menu>
        <Menu mnemonicParsing="false" text="Moves">
          <items>
-               <MenuItem mnemonicParsing="false" text="Mark up">
+               <MenuItem fx:id="markUpItem" mnemonicParsing="false" onAction="#markClicked" text="Mark up">
                   <accelerator>
                      <KeyCodeCombination alt="ANY" code="UP" control="UP" meta="UP" shift="UP" shortcut="UP" />
                   </accelerator></MenuItem>
-               <MenuItem mnemonicParsing="false" text="Mark down">
+               <MenuItem fx:id="markDownItem" mnemonicParsing="false" onAction="#markClicked" text="Mark down">
                   <accelerator>
                      <KeyCodeCombination alt="ANY" code="DOWN" control="UP" meta="UP" shift="UP" shortcut="UP" />
                   </accelerator></MenuItem>
-               <MenuItem mnemonicParsing="false" text="Mark left">
+               <MenuItem fx:id="markLeftItem" mnemonicParsing="false" onAction="#markClicked" text="Mark left">
                   <accelerator>
                      <KeyCodeCombination alt="ANY" code="LEFT" control="UP" meta="UP" shift="UP" shortcut="UP" />
                   </accelerator></MenuItem>
-               <MenuItem mnemonicParsing="false" text="Mark right">
+               <MenuItem fx:id="markRightItem" mnemonicParsing="false" onAction="#markClicked" text="Mark right">
                   <accelerator>
                      <KeyCodeCombination alt="ANY" code="RIGHT" control="UP" meta="UP" shift="UP" shortcut="UP" />
                   </accelerator></MenuItem>

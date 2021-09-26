@@ -26,6 +26,8 @@ import javafx.util.Pair;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
 
 public class SolitaireController implements ISubscriber {
     private Solitaire solitaire;
@@ -56,6 +58,14 @@ public class SolitaireController implements ISubscriber {
     private MenuItem jumpLeftItem;
     @FXML
     private MenuItem jumpRightItem;
+    @FXML
+    private MenuItem markUpItem;
+    @FXML
+    private MenuItem markDownItem;
+    @FXML
+    private MenuItem markLeftItem;
+    @FXML
+    private MenuItem markRightItem;
 
     public SolitaireController() throws IOException {
         PegContextMenuController pcmController = new PegContextMenuController();
@@ -284,5 +294,103 @@ public class SolitaireController implements ISubscriber {
                     markedPeg,
                     GridPane.getRowIndex(markedPeg),
                     GridPane.getColumnIndex(markedPeg) + 2));
+    }
+
+    private void attemptMarking(Direction dir) {
+        int dr = 0, dc = 0;
+        switch (dir) {
+            case UP -> dr = -1;
+            case DOWN -> dr = 1;
+            case LEFT -> dc = -1;
+            case RIGHT -> dc = 1;
+        }
+        int r = GridPane.getRowIndex(markedPeg);
+        int c = GridPane.getColumnIndex(markedPeg);
+        Circle chosenPeg = getPegByRowCol(r + dr, c + dc);
+        if (chosenPeg != null) {
+            markPeg(chosenPeg);
+            return;
+        }
+
+        Function<Integer, ArrayList<Integer>> genPos = n -> {
+            ArrayList<Integer> result = new ArrayList<>(List.of(n));
+            boolean stop = false;
+            for (int i = 1; !stop; i++) {
+                stop = true;
+                if (n - i >= 0) {
+                    stop = false;
+                    result.add(n - i);
+                }
+                if (n + i < Solitaire.dim) {
+                    stop = false;
+                    result.add(n + i);
+                }
+            }
+            return result;
+        };
+
+        switch (dir) {
+            case UP -> {
+                for (int newR = r - 1; newR >= 0; newR--)
+                    for (int newC : genPos.apply(c)) {
+                        chosenPeg = getPegByRowCol(newR, newC);
+                        if (chosenPeg != null) {
+                            markPeg(chosenPeg);
+                            return;
+                        }
+                    }
+            }
+            case DOWN -> {
+                for (int newR = r + 1; newR < Solitaire.dim; newR++)
+                    for (int newC : genPos.apply(c)) {
+                        chosenPeg = getPegByRowCol(newR, newC);
+                        if (chosenPeg != null) {
+                            markPeg(chosenPeg);
+                            return;
+                        }
+                    }
+            }
+            case LEFT -> {
+                for (int newC = c - 1; newC >= 0; newC--)
+                    for (int newR : genPos.apply(r)) {
+                        chosenPeg = getPegByRowCol(newR, newC);
+                        if (chosenPeg != null) {
+                            markPeg(chosenPeg);
+                            return;
+                        }
+                    }
+            }
+            case RIGHT -> {
+                for (int newC = c + 1; newC < Solitaire.dim; newC++)
+                    for (int newR : genPos.apply(r)) {
+                        chosenPeg = getPegByRowCol(newR, newC);
+                        if (chosenPeg != null) {
+                            markPeg(chosenPeg);
+                            return;
+                        }
+                    }
+            }
+        }
+    }
+
+    private enum Direction {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT
+    }
+
+    @FXML
+    void markClicked(ActionEvent event) {
+        event.consume();
+        if (event.getTarget() == markUpItem) {
+            attemptMarking(Direction.UP);
+        } else if (event.getTarget() == markDownItem) {
+            attemptMarking(Direction.DOWN);
+        } else if (event.getTarget() == markLeftItem) {
+            attemptMarking(Direction.LEFT);
+        } else if (event.getTarget() == markRightItem) {
+            attemptMarking(Direction.RIGHT);
+        }
     }
 }
