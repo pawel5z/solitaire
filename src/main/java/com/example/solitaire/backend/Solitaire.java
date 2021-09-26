@@ -7,7 +7,7 @@ import java.util.*;
 import static java.lang.Math.abs;
 
 public class Solitaire {
-    private static final int dim = 7;
+    public static final int dim = 7;
     private static final ArrayList<Pair<Integer, Integer>> europeanOnly;
     private static final ArrayList<Pair<Integer, Integer>> europeanHolesSolvable;
 
